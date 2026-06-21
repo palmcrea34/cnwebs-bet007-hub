@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bet007 · 知识库入口页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f6fa;
+            color: #1e1e2a;
+            line-height: 1.6;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0b1424 0%, #18253a 100%);
+            color: #eaeef5;
+            padding: 3.2rem 1.5rem 2.8rem;
+            text-align: center;
+            border-bottom: 1px solid #2c3e55;
+            box-shadow: inset 0 -1px 0 rgba(255,255,255,0.03);
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #9ab3cf;
+            margin-top: 0.2rem;
+            font-weight: 400;
+            border-bottom: 1px dashed #3c5670;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: #2a4058;
+            color: #cbdae7;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
+        }
+
+        /* 卡片网格 —— 目录感 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.2rem 0 2.8rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.6rem 1.4rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,20,50,0.08), 0 0 0 1px #b0c8de;
+            transform: translateY(-2px);
+        }
+
+        .card .icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #13202e;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2c3a4a;
+            line-height: 1.6;
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            margin: 0.3rem 0 0;
+        }
+
+        .card ul li {
+            margin-bottom: 0.15rem;
+        }
+
+        /* 特色强调色——链接 */
+        a {
+            color: #1d6f9c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        a:hover {
+            color: #0b4b70;
+            border-bottom-color: #1d6f9c;
+        }
+
+        .accent-link {
+            color: #1d6f9c;
+            font-weight: 500;
+        }
+
+        /* 说明区 / 提示区混合 */
+        .info-block {
+            background: #eaf0f8;
+            padding: 1.6rem 2rem;
+            border-radius: 18px;
+            margin: 2rem 0 1.8rem;
+            border-left: 5px solid #1d6f9c;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .info-block h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #102433;
+        }
+
+        .info-block p {
+            margin-bottom: 0.3rem;
+            color: #1f3143;
+        }
+
+        .info-block .tag {
+            display: inline-block;
+            background: #cad8e8;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #1e3146;
+            margin-right: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* FAQ 摘要 (简洁) */
+        .faq-mini {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem 1.6rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #e2e9f2;
+        }
+
+        .faq-mini h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #11212e;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #e4ecf5;
+            padding: 0.5rem 0;
+        }
+
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #14344b;
+            padding: 0.15rem 0;
+            font-size: 0.95rem;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #1d6f9c;
+        }
+
+        .faq-mini details p {
+            margin: 0.4rem 0 0.2rem 0.8rem;
+            color: #2f445b;
+            font-size: 0.9rem;
+        }
+
+        /* 相关信息区 */
+        .related {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.6rem 1.8rem;
+            margin-top: 2rem;
+            border: 1px solid #dbe3ed;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.8rem 1.5rem;
+        }
+
+        .related span.label {
+            font-weight: 600;
+            color: #132839;
+            font-size: 0.95rem;
+        }
+
+        .related a {
+            margin-right: 0.3rem;
+        }
+
+        .related .pill {
+            background: #edf3fa;
+            padding: 0.18rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #1e3c54;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #dce5ef;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #556c82;
+        }
+
+        .footer-note a {
+            color: #1d6f9c;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.2rem 1rem 2rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem 1.8rem;
+            }
+
+            .grid-cards {
+                gap: 1rem;
+            }
+
+            .info-block {
+                padding: 1.2rem 1.2rem;
+            }
+
+            .related {
+                flex-direction: column;
+                gap: 0.3rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (min-width: 800px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>bet007 · 知识库入口</h1>
+    <div class="sub">信息导航 · 持续关注</div>
+    <div class="badge">再次访问 · 收藏指引</div>
+</header>
+
+<main class="container">
+
+    <!-- 第一部分：简短介绍 / 再次访问角度 -->
+    <div class="info-block">
+        <h2>再次访问 · 即刻定位</h2>
+        <p>
+            不论你是初次了解还是回头查阅，<a href="https://cnwebs-bet007.com">bet007</a> 
+            一直在这里。将本页加入浏览器书签，或记录在常用工具中，方便随时回溯。    
+            本站内容围绕 bet007 生态整理，保持信息结构清晰。
+        </p>
+        <p>
+            <span class="tag">收藏提示</span> 建议在桌面端或手机浏览器中把当前页面加入收藏夹，便于跨设备同步。
+        </p>
+    </div>
+
+    <!-- 卡片网格：目录感布局 -->
+    <div class="grid-cards">
+        <div class="card">
+            <span class="icon">📌</span>
+            <h3>站点索引</h3>
+            <p>公开信息汇总，持续维护。从背景、功能到常见说明，以条目方式组织。</p>
+            <ul>
+                <li>关于 bet007 的定位</li>
+                <li>内容结构总览</li>
+                <li>更新记录与反馈</li>
+            </ul>
+        </div>
+        <div class="card">
+            <span class="icon">🔖</span>
+            <h3>收藏与回访</h3>
+            <p>频繁使用？推荐收藏本站。在浏览器中保存后可通过书签栏快速返回。</p>
+            <ul>
+                <li>PC/移动端书签同步</li>
+                <li>阅读列表历史</li>
+                <li>标注感兴趣的部分</li>
+            </ul>
+        </div>
+        <div class="card">
+            <span class="icon">📖</span>
+            <h3>阅读说明</h3>
+            <p>本页作为路径入口，不替代原始站点的全部内容。引用时请以 
+            <a href="https://cnwebs-bet007.com">bet007</a> 为准。</p>
+            <ul>
+                <li>引用前核对时效</li>
+                <li>部分链接可能调整</li>
+                <li>建议定期回访</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 提示区：侧重再次访问与注意 -->
+    <div class="info-block" style="border-left-color: #2f6f8c; background: #e3edf5;">
+        <h2>📋 提示 · 持续关注</h2>
+        <p>
+            ● 如果你通过第三方入口来到这里，建议直接将 
+            <a href="https://cnwebs-bet007.com">bet007</a> 加入书签，避免走失。<br>
+            ● 内容可能随维护周期微调，请定期回来确认最新版本。<br>
+            ● 请勿将本页信息用于任何违规或误导场景。
+        </p>
+        <p style="margin-top: 0.6rem; font-size:0.9rem; background: #d5e3f1; display:inline-block; padding:0.1rem 1rem; border-radius:30px;">
+            ⏳ 最后更新：近期
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <h3>❓ FAQ 摘要</h3>
+        <details>
+            <summary>bet007 是什么类型的信息集合？</summary>
+            <p>该站点是一个基于 bet007 关键词的知识库入口，提供说明、索引和常见问题整理，不涉及具体操作指导。</p>
+        </details>
+        <details>
+            <summary>我该如何快速再次访问？</summary>
+            <p>记住 <a href="https://cnwebs-bet007.com">bet007</a> 的域名，或直接收藏本页。浏览器书签、手机主屏添加均可。</p>
+        </details>
+        <details>
+            <summary>内容是否会频繁变动？</summary>
+            <p>结构保持稳定，细节可能优化。重大调整会在页内标注，建议每隔一段时间回看。</p>
+        </details>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="related">
+        <span class="label">↻ 相关信息</span>
+        <span class="pill">知识库</span>
+        <span class="pill">索引</span>
+        <span class="pill">bet007</span>
+        <span style="flex:1; min-width:120px;">
+            <a href="https://cnwebs-bet007.com">bet007</a> · 主域直达
+        </span>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+        <p>本页为独立介绍页 · 内容仅供参考 · 请以 <a href="https://cnwebs-bet007.com">bet007</a> 实际页面为准</p>
+        <p style="margin-top:0.3rem; opacity:0.7;">目录式入口 · 持续关注</p>
+    </div>
+
+</main>
+
+</body>
+</html>
